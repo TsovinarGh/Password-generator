@@ -13,7 +13,7 @@ namespace ConsoleTest
         {
             for(int i = 0; i < 10; i++)
             {
-                var pwd = Password.Generate();
+                var pwd = Password.Generate(3);
                 Console.WriteLine(pwd);
 
             }

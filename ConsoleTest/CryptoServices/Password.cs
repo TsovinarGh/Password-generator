@@ -9,10 +9,11 @@ namespace CryptoServices
 {
     public class Password
     {
-        private byte[] content = new byte[16];
+        private byte[] content;
 
         private Password(byte[] content)
         {
+            this.content = new byte[content.Length];
             this.content = content;
         }
 
@@ -20,21 +21,22 @@ namespace CryptoServices
         {
             var builder = new StringBuilder();
 
-            foreach(var member in content)
+            foreach (var member in content)
             {
-                string pairStr = member.ToString("X");
-                builder.Append(pairStr);   
+                string pairStr = member.ToString("X2");
+                builder.Append(pairStr);
             }
 
             return builder.ToString();
         }
 
-        public static Password Generate()
+
+        public static Password Generate(int length)
         {
             Password result;
             using (var rng = new RNGCryptoServiceProvider())
             {
-                byte[] tempArray = new byte[16];
+                byte[] tempArray = new byte[length];
                 rng.GetBytes(tempArray);
                 result = new Password(tempArray);
             }
